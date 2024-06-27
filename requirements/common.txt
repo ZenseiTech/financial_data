@@ -1,4 +1,3 @@
-pandas
-pandas_datareader
-numpy
+yfinance
 matplotlib
+PyGObject

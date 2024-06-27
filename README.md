@@ -1,8 +1,5 @@
-** This is an app to check Alpine-Ajax**
+** This is an app for financial analysis of stocks**
 
-https://alpine-ajax.js.org/
-
-https://alpinejs.dev/
 
 **Build the requirements**:
 
