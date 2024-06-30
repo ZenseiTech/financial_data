@@ -1,3 +1,5 @@
 yfinance
 matplotlib
 PyGObject
+dask[dataframe]
+duckdb
