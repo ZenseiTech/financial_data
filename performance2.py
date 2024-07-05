@@ -5,44 +5,7 @@ import numba
 import numpy as np
 import pandas as pd
 
-size = 1_000_000
-n = 100
-
-df = pd.DataFrame(
-    {
-        "a": np.random.randn(size),
-        "b": np.random.randn(size),
-        "N": np.random.randint(n, size, (size)),
-        "x": "x",
-    }
-)
-df
-
-# numba.set_num_threads(8)
-
-
-@numba.jit
-def f(x):
-    """Return the calculation."""
-    return x * (x - 1)
-
-
-@numba.jit
-def integrate_f(a, b, N):
-    """Calculate."""
-    s = 0
-    dx = (b - a) / N
-
-    for i in range(N):
-        s += f(a + i * dx)
-
-    return s * dx
-
-
-# result = df.apply(lambda x: integrate_f(x["a"], x["b"], x["N"]), axis=1)
-# print(result)
-
-# numba.set_num_threads(8)
+numba.set_num_threads(12)
 
 
 @numba.njit(fastmath=True)
@@ -80,8 +43,10 @@ def compute_numba(df):
     return pd.Series(result, index=df.index, name="result")
 
 
-start_time = time.time()
-result = compute_numba(df)
-print("Done")
-elapsed_time = time.time() - start_time
-print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
+def process(df):
+    """Process start."""
+    start_time = time.time()
+    result = compute_numba(df)
+    print(result)
+    elapsed_time = time.time() - start_time
+    print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
