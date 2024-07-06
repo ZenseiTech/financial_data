@@ -1,18 +1,15 @@
-"""Performance module."""
+"""Polars performance."""
 import numba
-
-numba.set_num_threads(12)
 
 
 @numba.jit(fastmath=True)
 def f(x):
-    """Return the calculation."""
+    """Process."""
     return x * (x - 1)
 
 
-@numba.jit(fastmath=True)
 def integrate_f(a, b, N):
-    """Calculate."""
+    """Integrate calculation."""
     s = 0
     dx = (b - a) / N
 
@@ -32,4 +29,4 @@ def integrate_f(a, b, N):
 
 def process(df):
     """Process start."""
-    return integrate_f(df["a"].to_numpy(), df["b"].to_numpy(), df["N"].to_numpy())
+    return integrate_f(df.get_column("a"), df.get_column("b"), df.get_column("N"))

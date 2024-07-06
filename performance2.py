@@ -1,6 +1,4 @@
 """Performance module."""
-import time
-
 import numba
 import numpy as np
 import pandas as pd
@@ -45,8 +43,4 @@ def compute_numba(df):
 
 def process(df):
     """Process start."""
-    start_time = time.time()
-    result = compute_numba(df)
-    print(result)
-    elapsed_time = time.time() - start_time
-    print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
+    return compute_numba(df)
