@@ -9,10 +9,11 @@ import performance as pf
 import performance3 as pf3
 import performance3 as pf2
 
+# import performance_modin as pf5
 # import performance_polars as pf4
 
-size = 100_000
-n = 100
+size = 1_000_000
+n = 1000
 
 df = pd.DataFrame(
     {
@@ -33,37 +34,20 @@ def run(pf, df, times=1):
     return result
 
 
-times = 3
+def time_run(name, performance_mod, times=1, is_print_result=False):
+    """Time check."""
+    print(name)
+    start_time = time.time()
+    result = run(performance_mod, df, times)
+    elapsed_time = time.time() - start_time
+    print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
+    if is_print_result:
+        print(result)
+    print()
 
-print("Performance 1")
-start_time = time.time()
-result = run(pf, df, times)
-elapsed_time = time.time() - start_time
-print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
-# print(result)
-print()
 
-print("Performance 2")
-start_time = time.time()
-result = run(pf2, df, times)
-elapsed_time = time.time() - start_time
-print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
-# print(result)
-print()
-
-print("Performance 3")
-start_time = time.time()
-result = run(pf3, df, times)
-elapsed_time = time.time() - start_time
-print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
-# print(result)
-print()
-
-# print("Performance Polars")
-# start_time = time.time()
-# df = pl.from_pandas(df)
-# result = run(pf4, df, times)
-# elapsed_time = time.time() - start_time
-# print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
-# # print(result)
-# print()
+time_run("Performance 1", pf)
+time_run("Performance 2", pf2)
+time_run("Performance 3", pf3)
+# time_run("Performance Modin", pf5)
+# time_run("Performance Polars", pf4)

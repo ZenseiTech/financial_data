@@ -3,3 +3,4 @@ matplotlib
 duckdb
 numba
 polars
+modin
