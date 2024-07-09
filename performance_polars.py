@@ -2,12 +2,13 @@
 import numba
 
 
-@numba.jit(fastmath=True)
+@numba.jit(fastmath=True, nopython=True)
 def f(x):
     """Process."""
     return x * (x - 1)
 
 
+@numba.jit(fastmath=True, parallel=True, nopython=True)
 def integrate_f(a, b, N):
     """Integrate calculation."""
     s = 0
@@ -29,4 +30,8 @@ def integrate_f(a, b, N):
 
 def process(df):
     """Process start."""
-    return integrate_f(df.get_column("a"), df.get_column("b"), df.get_column("N"))
+    return integrate_f(
+        df.get_column("a").to_numpy(),
+        df.get_column("b").to_numpy(),
+        df.get_column("N").to_numpy(),
+    )
