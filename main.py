@@ -34,7 +34,7 @@ def run(pf, df, times=1):
     return result
 
 
-def time_run(name, performance_mod, times=1, is_print_result=False):
+def time_run(name, performance_mod, times=1, is_print_result=True):
     """Time check."""
     print(name)
     start_time = time.time()
@@ -42,7 +42,7 @@ def time_run(name, performance_mod, times=1, is_print_result=False):
     elapsed_time = time.time() - start_time
     print(f"Current elapsed time: {elapsed_time:.2f} seconds.")
     if is_print_result:
-        print(result)
+        print(type(result))
     print()
 
 

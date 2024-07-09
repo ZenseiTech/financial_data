@@ -5,13 +5,13 @@ from numba import prange
 numba.set_num_threads(12)
 
 
-@numba.jit(fastmath=True)
+@numba.jit(fastmath=True, nopython=True)
 def f(x):
     """Return the calculation."""
     return x * (x - 1)
 
 
-@numba.jit(fastmath=True, parallel=True)
+@numba.jit(fastmath=True, parallel=True, nopython=True)
 def integrate_f(a, b, N):
     """Calculate."""
     s = 0

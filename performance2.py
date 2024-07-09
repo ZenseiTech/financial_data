@@ -13,7 +13,7 @@ def f_plain(x):
     return x * (x - 1)
 
 
-@numba.njit(fastmath=True, parallel=True)
+@numba.njit(fastmath=True, parallel=True, nopython=True)
 def integrate_f_numba(a, b, N):
     """Return the calc."""
     s = 0
@@ -23,7 +23,7 @@ def integrate_f_numba(a, b, N):
     return s * dx
 
 
-@numba.njit(fastmath=True, parallel=True)
+@numba.njit(fastmath=True, parallel=True, nopython=True)
 def apply_integrate_f_numba(col_a, col_b, col_N):
     """Return the calc."""
     n = len(col_N)
