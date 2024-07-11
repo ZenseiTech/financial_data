@@ -4,19 +4,20 @@ import time
 
 import numpy as np
 import pandas as pd
+import polars as pl
 
 import performance_apply as pf_apply
-import performance_original as pf_original
+
+# import performance_original as pf_original
 import performance_original_parallel as pf_original_parallel
+import performance_polars as pf_polars
 import performance_vectorized as pf_vectorized
 
-# import polars as pl
-
 # import performance_modin as pf5
-# import performance_polars as pf_polars
 
-size = 1_00_000
-n = 1000
+
+size = 10_000_000
+n = 100
 
 df = pd.DataFrame(
     {
@@ -32,7 +33,7 @@ print()
 
 def run(pf, df, times=3):
     """Run generic."""
-    for i in range(times):
+    for _ in range(times):
         result = pf.process(df)
     return result
 
@@ -52,7 +53,7 @@ def time_run(name, performance_mod, times=1, is_print_result=True):
 
 times = 1
 print_result = False
-time_run("Performance original", pf_original, times, print_result)
+# time_run("Performance original", pf_original, times, print_result)
 time_run("Performance original parallel", pf_original_parallel, times, print_result)
 time_run("Performance vectorized", pf_vectorized, times, print_result)
 time_run("Performance apply", pf_apply, times, print_result)
@@ -60,5 +61,5 @@ time_run("Performance apply", pf_apply, times, print_result)
 
 # time_run("Performance Modin", pf5)
 
-# df = pl.from_pandas(df)
-# time_run("Performance Polars", pf_polars)
+df = pl.from_pandas(df)
+time_run("Performance Polars", pf_polars, times, print_result)

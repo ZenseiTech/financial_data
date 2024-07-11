@@ -1,5 +1,8 @@
 """Polars performance."""
 import numba
+from numba import prange
+
+numba.set_num_threads(12)
 
 
 @numba.jit(fastmath=True, nopython=True)
@@ -19,7 +22,7 @@ def integrate_f(a, b, N):
     index = 0
 
     for n in N:
-        for i in range(n):
+        for i in prange(n):
             s += f(a[index] + i * dx[index])
         calcs.append(s * dx[index])
         index += 1
