@@ -5,3 +5,5 @@ numba
 polars
 modin
 pyarrow
+numexpr
+dask
