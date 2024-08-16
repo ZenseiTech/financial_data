@@ -7,3 +7,4 @@ modin
 pyarrow
 numexpr
 dask
+pandarallel

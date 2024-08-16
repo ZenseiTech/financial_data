@@ -11,6 +11,8 @@ import performance_numexpr as pf_ne
 
 # import performance_original as pf_original
 import performance_original_parallel as pf_original_parallel
+
+# import performance_pandarallel_apply as pf_pandarallel_apply
 import performance_polars as pf_polars
 import performance_vectorized as pf_vectorized
 
@@ -52,13 +54,14 @@ def time_run(name, performance_mod, times=1, is_print_result=True):
     print()
 
 
-times = 1
+times = 3
 print_result = False
 # time_run("Performance original", pf_original, times, print_result)
 time_run("Performance original parallel", pf_original_parallel, times, print_result)
 time_run("Performance vectorized", pf_vectorized, times, print_result)
 time_run("Performance apply", pf_apply, times, print_result)
 time_run("Performance numexpr", pf_ne, times, print_result)
+# time_run("Performance pandarallel", pf_pandarallel_apply, times, print_result)
 
 # time_run("Performance Modin", pf5)
 
